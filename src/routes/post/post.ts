@@ -1,7 +1,10 @@
 import express from "express";
 import { createPost } from "./create.controller";
-import { type PostType } from "./validator";
+import { type Post } from "@prisma/client";
+import { getAllPosts, getPost } from "./get.controller";
 
 export const postRouter = express.Router();
 
-postRouter.post<{}, PostType>("/", createPost);
+postRouter.post<{}, Post>("/", createPost);
+postRouter.get<{ id: string }, Post>("/:id", getPost);
+postRouter.get("/", getAllPosts);
