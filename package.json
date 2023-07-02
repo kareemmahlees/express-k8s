@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.ts",
   "scripts": {
-    "dev": "nodemon src/main.ts",
+    "dev": "nodemon --watch src src/main.ts",
     "test:dev": "vitest",
     "test:ci": "vitest run",
     "lint": "eslint ."
