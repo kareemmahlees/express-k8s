@@ -1,0 +1,23 @@
+name: Testing
+
+on:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: "14"
+            - name: install yarn
+              run: npm i -g yarn
+            - name: install deps
+              run: yarn
+            - name: spin up app container
+              run: docker compose up -d
+            - name: run the tests
+              run: yarn test:ci
