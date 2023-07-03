@@ -27,7 +27,7 @@ jobs:
               run: |
                   touch .env
                   echo PORT=3000 >> .env
-                  echo PACTUM_REQUEST_BASE_URL=http://127.0.0.1/:3000 >> .env
+                  echo PACTUM_REQUEST_BASE_URL=http://127.0.0.1:3000 >> .env
                   cat .env
             - name: run the tests
               run: yarn test:ci
