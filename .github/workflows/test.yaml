@@ -7,7 +7,7 @@ on:
 
 env:
     PORT: 3000
-    PACTUM_REQUEST_BASE_URL: http://localhost:$PORT
+    PACTUM_REQUEST_BASE_URL: http://localhost:3000
 
 jobs:
     test:
