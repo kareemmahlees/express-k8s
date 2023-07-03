@@ -9,15 +9,13 @@ export const updatePost = async (
     req: Request<{ id: string }, {}, Partial<PostType>>,
     res: Response
 ) => {
-    const payloadValidation = await validatePayload(
+    const payloadValidation = await validatePayload<Partial<PostType>>(
         req.body,
         PostSchema.partial()
     );
-    const paramsValidation = await validatePayload(
-        req.params,
-        z.object({
-            id: z.string().uuid(),
-        })
+    const paramsValidation = await validatePayload<string>(
+        req.params.id,
+        z.string().uuid()
     );
     if (!payloadValidation.success)
         return res
@@ -25,11 +23,13 @@ export const updatePost = async (
             .json({ error: payloadValidation.error?.message });
     if (!paramsValidation.success)
         return res.status(400).json({ error: paramsValidation.error?.message });
+    if (!req.body)
+        return res.status(400).json({ error: "Payload can't be empty" });
     let post;
     try {
         post = await prisma.post.update({
             where: {
-                id: req.params.id,
+                id: paramsValidation.data,
             },
             data: req.body,
         });
