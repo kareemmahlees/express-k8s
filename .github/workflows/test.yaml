@@ -3,7 +3,7 @@ name: Testing
 on:
     pull_request:
         branches:
-            - main
+            - master
 
 env:
     PORT: 3000
