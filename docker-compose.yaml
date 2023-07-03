@@ -6,3 +6,6 @@ services:
         container_name: express-k8s
         ports:
             - 3000:3000
+        environment:
+            - PORT=3000
+            - PACTUM_REQUEST_BASE_URL=http://localhost:${PORT}

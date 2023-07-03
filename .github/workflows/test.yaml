@@ -5,6 +5,10 @@ on:
         branches:
             - main
 
+env:
+    PORT: 3000
+    PACTUM_REQUEST_BASE_URL: http://localhost:$PORT
+
 jobs:
     test:
         runs-on: ubuntu-latest
