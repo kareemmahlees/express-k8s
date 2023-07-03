@@ -23,5 +23,11 @@ jobs:
               run: yarn
             - name: spin up app container
               run: docker compose up -d
+            - name: Create env file
+              run: |
+                  touch .env
+                  echo PORT=3000 >> .env
+                  echo PACTUM_REQUEST_BASE_URL=http://localhost:3000 >> .env
+                  cat .env
             - name: run the tests
               run: yarn test:ci
