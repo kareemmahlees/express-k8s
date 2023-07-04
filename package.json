@@ -9,7 +9,7 @@
         "dev": "nodemon --watch src src/main.ts",
         "test:dev": "vitest",
         "test:ci": "vitest run",
-        "lint": "eslint ."
+        "lint": "eslint src/"
     },
     "keywords": [],
     "author": "",
