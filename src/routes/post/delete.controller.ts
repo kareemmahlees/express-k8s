@@ -8,13 +8,16 @@ export const deletePost = async (
     req: Request<{ id: string }>,
     res: Response
 ) => {
-    const result = await validatePayload(req.params.id, z.string().uuid());
+    const result = await validatePayload<string>(
+        req.params.id,
+        z.string().uuid()
+    );
     if (!result.success)
         return res.status(400).json({ error: result.error?.message });
     try {
         await prisma.post.delete({
             where: {
-                id: req.params.id,
+                id: result.data,
             },
         });
     } catch (e) {
