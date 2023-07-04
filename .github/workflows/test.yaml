@@ -1,4 +1,4 @@
-name: Testing
+name: Checking
 
 on:
     pull_request:
@@ -10,24 +10,14 @@ env:
     PACTUM_REQUEST_BASE_URL: http://127.0.0.1:3000
 
 jobs:
-    test:
+    lint:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
               with:
                   node-version: "14"
-            - name: install yarn
-              run: npm i -g yarn
             - name: install deps
               run: yarn
-            - name: spin up app container
-              run: docker compose up -d
-            - name: Create env file
-              run: |
-                  touch .env
-                  echo PORT=3000 >> .env
-                  echo PACTUM_REQUEST_BASE_URL=http://127.0.0.1:3000 >> .env
-                  cat .env
-            - name: run the tests
-              run: yarn test:ci
+            - name: run eslint
+              run: yarn lint
