@@ -22,3 +22,9 @@ spec:
                           cpu: "500m"
                   ports:
                       - containerPort: 3000
+                  env:
+                      - name: PORT
+                        valueFrom:
+                            configMapKeyRef:
+                                name: express-k8s
+                                key: api_port
