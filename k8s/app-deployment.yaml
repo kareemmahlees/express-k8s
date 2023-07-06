@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: express-k8s
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: express-k8s
+    template:
+        metadata:
+            labels:
+                app: express-k8s
+        spec:
+            containers:
+                - name: express-k8s
+                  imagePullPolicy: Never
+                  image: express-k8s
+                  resources:
+                      limits:
+                          memory: "128Mi"
+                          cpu: "500m"
+                  ports:
+                      - containerPort: 3000
