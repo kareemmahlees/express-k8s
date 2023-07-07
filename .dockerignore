@@ -1,0 +1,8 @@
+node_modules
+dist
+.github
+k8s
+test
+types
+.prettierrc
+README.md
