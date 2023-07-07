@@ -2,9 +2,8 @@ import express from "express";
 import { signUp } from "./signup.controller";
 import { type UserType } from "./validator";
 import { login } from "./login.controller";
-import { authGuard } from "@auth/index";
 
 export const authRouter = express.Router();
 
 authRouter.post<{}, { access_token: string }, UserType>("/signup", signUp);
-authRouter.post<{}, { access_token: string }>("/login", authGuard, login);
+authRouter.post<{}, { access_token: string }>("/login", login);
