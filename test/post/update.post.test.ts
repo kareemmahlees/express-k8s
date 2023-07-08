@@ -1,10 +1,13 @@
-import { describe, it } from "vitest";
-import { spec, request } from "pactum";
-import * as dotenv from "dotenv";
-import * as dotenvExpand from "dotenv-expand";
+import { beforeAll, beforeEach, describe, it } from "vitest";
+import { request, spec } from "pactum";
 
-dotenvExpand.expand(dotenv.config());
-request.setBaseUrl(process.env.PACTUM_REQUEST_BASE_URL);
+beforeAll(async () => {
+    const res = await spec().post("/auth/login").withBody({
+        email: "kareemmahlees@gmail.com",
+        password: "password123",
+    });
+    request.setBearerToken(res.json.access_token);
+});
 
 describe("update post", () => {
     it("should update post", async () => {
