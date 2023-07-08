@@ -1,14 +1,6 @@
 import { beforeAll, beforeEach, describe, it } from "vitest";
 import { request, spec } from "pactum";
 
-beforeAll(async () => {
-    const res = await spec().post("/auth/login").withBody({
-        email: "kareemmahlees@gmail.com",
-        password: "password123",
-    });
-    request.setBearerToken(res.json.access_token);
-});
-
 describe("update post", () => {
     it("should update post", async () => {
         const mockPost = {

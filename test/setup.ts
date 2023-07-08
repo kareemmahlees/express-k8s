@@ -1,5 +1,9 @@
 import { request, spec } from "pactum";
 import { beforeAll } from "vitest";
+import * as dotenv from "dotenv";
+import * as dotenvExpand from "dotenv-expand";
+
+dotenvExpand.expand(dotenv.config());
 
 beforeAll(async () => {
     request.setBaseUrl(process.env.PACTUM_REQUEST_BASE_URL as string);
