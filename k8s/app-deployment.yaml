@@ -28,3 +28,19 @@ spec:
                             configMapKeyRef:
                                 name: express-k8s
                                 key: api_port
+                      - name: JWT_SECRET
+                        valueFrom:
+                            secretKeyRef:
+                                name: express-k8s
+                                key: jwt_secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: express-k8s
+spec:
+    selector:
+        app: express-k8s
+    ports:
+        - port: 3000
+          targetPort: 3000

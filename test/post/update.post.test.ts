@@ -1,5 +1,5 @@
-import { beforeAll, beforeEach, describe, it } from "vitest";
-import { request, spec } from "pactum";
+import { describe, it } from "vitest";
+import { spec } from "pactum";
 
 describe("update post", () => {
     it("should update post", async () => {
