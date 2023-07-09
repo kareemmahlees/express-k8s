@@ -1,8 +1,12 @@
 import { describe, it } from "vitest";
 import { spec } from "pactum";
+import { faker } from "@faker-js/faker";
 
 describe("create post", () => {
-    const mockPost = { title: "title 1", description: "description 1" };
+    const mockPost = {
+        title: faker.word.noun(),
+        description: faker.lorem.paragraph(),
+    };
     it("should create post", async () => {
         await spec()
             .post("/post")
@@ -13,7 +17,7 @@ describe("create post", () => {
     });
 
     it("should error create post", async () => {
-        const errorMockPost = { title: "title 1" };
+        const errorMockPost = { title: faker.word.noun() };
         await spec().post("/post").withBody(errorMockPost).expectStatus(400);
     });
 });

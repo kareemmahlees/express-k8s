@@ -1,11 +1,12 @@
 import { describe, it } from "vitest";
 import { spec } from "pactum";
+import { faker } from "@faker-js/faker";
 
 describe("delete post", () => {
     it("should delete post", async () => {
         const mockPost = {
-            title: "mock title",
-            description: "mock description",
+            title: faker.word.noun(),
+            description: faker.lorem.paragraph(),
         };
         const post = await spec().post("/post").withBody(mockPost);
         await spec()
@@ -16,7 +17,7 @@ describe("delete post", () => {
     it("should fail to delete post", async () => {
         await spec()
             .delete("/post/{id}")
-            .withPathParams("id", "914828d2-27da-4121-a633-aa84671ae843")
+            .withPathParams("id", faker.string.uuid())
             .expectStatus(404)
             .expectBodyContains("error");
     });
