@@ -1,14 +1,15 @@
 import { spec } from "pactum";
 import { describe, it } from "vitest";
+import { faker } from "@faker-js/faker";
 
 describe("sign up", () => {
     it("should sign up successfully", async () => {
         await spec()
             .post("/auth/signup")
             .withBody({
-                name: "kareem ebrahim",
-                email: "kareemmahlees@gmail.com",
-                password: "password123",
+                name: faker.person.fullName(),
+                email: faker.internet.email(),
+                password: faker.internet.password(),
             })
             .expectStatus(201)
             .expectBodyContains("access_token");
@@ -17,9 +18,9 @@ describe("sign up", () => {
         await spec()
             .post("/auth/signup")
             .withBody({
-                name: "kareem ebrahim",
-                email: "kareemmahlees.com",
-                password: "password123",
+                name: faker.person.fullName(),
+                email: "invalid email",
+                password: faker.internet.password(),
             })
             .expectStatus(400)
             .expectBodyContains("email");

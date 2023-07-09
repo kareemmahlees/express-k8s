@@ -15,7 +15,7 @@ export const getPost = async (req: Request<{ id: string }>, res: Response) => {
             id: req.params.id,
         },
     });
-    if (!post) res.status(404).json({ error: "post doesn't exist" });
+    if (!post) return res.status(404).json({ error: "post doesn't exist" });
     return res.json(post);
 };
 

@@ -1,11 +1,12 @@
 import { describe, it } from "vitest";
 import { spec } from "pactum";
+import { faker } from "@faker-js/faker";
 
 describe("get post", () => {
     it("should get single post", async () => {
         const mockPost = {
-            title: "mock title",
-            description: "mock description",
+            title: faker.word.noun(),
+            description: faker.lorem.paragraph(),
         };
         const res = await spec().post("/post").withBody(mockPost);
         await spec()
@@ -14,12 +15,11 @@ describe("get post", () => {
             .expectStatus(200)
             .expectBodyContains(res.json.id);
     });
-    it("should return bad request", async () => {
+    it("should return post not found", async () => {
         await spec()
             .get("/post/{id}")
-            .withPathParams("id", "something")
-            .expectStatus(400)
-            .expectBody({ error: "Invalid Id" });
+            .withPathParams("id", faker.string.uuid())
+            .expectStatus(404);
     });
 });
 
