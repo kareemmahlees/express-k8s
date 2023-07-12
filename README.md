@@ -96,8 +96,24 @@ $ kubectl apply -f ./k8s/app-secret.yaml
 $ kubectl apply -f ./k8s/app-deployment.yaml # will create deploy and svc
 ```
 
-To start receiving connections, we can use kubectl `port-forward` feature to expose our port locally:
+To start receiving connections, we can use kubectl `port-forward` feature to expose our service locally:
 
 ```console
 $ kubectl port-forward service/express-k8s 3000:3000
 ```
+
+Or we could utilize minikube tunneling :
+
+```console
+minikube service express-k8s
+```
+
+## Suggesting Features
+
+This project is meant to be community driven mainly, so if you have any suggestions for features, fixes or improvements feal free to file an issue explaining the old behavior and the desired behavior.
+
+## Contributing
+
+You can first file a feature request in the issues sections to discuss the feature you want to add, and then you can create a pull request for it.
+
+Please make sure you write unit tests for the code you write and make sure all the tests are passing.
