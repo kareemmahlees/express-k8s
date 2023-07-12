@@ -39,8 +39,10 @@ kind: Service
 metadata:
     name: express-k8s
 spec:
+    type: LoadBalancer
     selector:
         app: express-k8s
     ports:
         - port: 3000
           targetPort: 3000
+          nodePort: 30300
