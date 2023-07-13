@@ -88,7 +88,7 @@ Second, load the image in minikube:
 $ minikube image load express-k8s
 ```
 
-Now we can create the configMap, Secret, Service and Deployment:
+Now we can create the configMap, Secret, Service, Ingress and Deployment:
 
 ```console
 $ kubectl apply -f ./k8s/app-configMap.yaml
@@ -96,7 +96,11 @@ $ kubectl apply -f ./k8s/app-secret.yaml
 $ kubectl apply -f ./k8s/app-deployment.yaml # will create deploy and svc
 ```
 
-To start receiving connections, we can use kubectl `port-forward` feature to expose our service locally:
+To start receiving connections, there are 2 approaches we can follow:
+
+#### Using the service ( not recommended )
+
+we can utilize kubectl `port-forward` feature to access the service like so :
 
 ```console
 $ kubectl port-forward service/express-k8s 3000:3000
@@ -107,6 +111,41 @@ Or we could utilize minikube tunneling :
 ```console
 minikube service express-k8s
 ```
+
+#### Using the ingress
+
+First make sure to enable minikube addons for ingress:
+
+```console
+$ minikube addon enable ingress
+$ minikube addon enable ingress-dns
+```
+
+Second, create the ingress object:
+
+```console
+$ kubectl apply -f ./k8s/app-ingress.yaml
+```
+
+Now, our ingress doesn't actually have an external ip that we can go to, so we need minikube to help us in this matter.
+
+Utilizing the `tunnel` feature of minikube :
+
+```console
+$ minikube tunnel
+```
+
+Minikube now offers `127.0.0.1` as an external ip address for the ingress, but there is one step left, we need to add a port mapping for our host `expressk8s.com` in your `hosts` file.
+
+You will find this file located under `/etc/hosts` on MacOs, or under `C:\Windows\System32\drivers\etc\hosts` on Windows.
+
+Just append this line to the end of the file :
+
+```console
+127.0.0.1   expressk8s.com
+```
+
+Now you can go to `expressk8s.com/health-check` and you will see that the application is healthy 🙂
 
 ## Suggesting Features
 
