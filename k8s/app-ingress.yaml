@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: express-k8s
+spec:
+    rules:
+        - host: expressk8s.com
+          http:
+              paths:
+                  - pathType: Prefix
+                    path: "/"
+                    backend:
+                        service:
+                            name: express-k8s
+                            port:
+                                number: 3000
