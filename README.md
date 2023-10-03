@@ -3,7 +3,7 @@
 this is a fully featured/functional application involving routing, authentication, database, migrations, testing, docker and k8s deployment.
 
 For those who like to see the bigger picture, this is for you.
-
+<div>
 <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
 <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge"/>
@@ -14,6 +14,7 @@ For those who like to see the bigger picture, this is for you.
 <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white">
 <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/starship-DD0B78?style=for-the-badge&logo=starship&logoColor=white">
+</div>
 
 ## Features
 
